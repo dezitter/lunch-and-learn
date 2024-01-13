@@ -10,6 +10,9 @@ dependencies:
     version: 4.17.21
 
 devDependencies:
+  '@types/lodash':
+    specifier: 4.14.202
+    version: 4.14.202
   fast-check:
     specifier: 3.15.0
     version: 3.15.0
@@ -346,6 +349,10 @@ packages:
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
+    dev: true
+
+  /@types/lodash@4.14.202:
+    resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
     dev: true
 
   /@vitest/expect@1.1.0:
