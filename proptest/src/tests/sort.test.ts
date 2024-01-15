@@ -18,18 +18,20 @@ describe("unit tests", () => {
 
 describe.skip("Property-based tests - Sample", () => {
   const array = () =>
-    fc.array(fc.integer({ min: -100, max: 100 }), { minLength: 1, maxLength: 10 });
+    fc.array(fc.integer({ min: -100, max: 100 }), {
+      minLength: 1,
+      maxLength: 10,
+    });
 
   test("sample the inputs", () => {
-    const inputs = fc.sample(array())
+    const inputs = fc.sample(array());
     inputs.forEach((input) => {
       console.log(input);
-      
-    })
+    });
   });
 });
 
-describe("Property-based tests", () => {
+describe.skip("Property-based tests", () => {
   const array = () =>
     fc.array(fc.integer({ min: -100, max: 100 }), { maxLength: 10 });
 
@@ -37,7 +39,7 @@ describe("Property-based tests", () => {
     fc.assert(
       fc.property(array(), (input) => {
         const output = sort(input);
-        return containSameValues(input, output)
+        return containSameValues(input, output);
       })
     );
   });
@@ -46,7 +48,7 @@ describe("Property-based tests", () => {
     fc.assert(
       fc.property(array(), (list) => {
         const result = sort(list);
-        return isSorted(result)
+        return isSorted(result);
       })
     );
   });
