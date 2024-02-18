@@ -32,4 +32,5 @@
     "**/node_modules": true
   },
   "markdown.preview.fontSize": 10,
+  "markdown-preview-enhanced.mermaidTheme": "forest"
 }
