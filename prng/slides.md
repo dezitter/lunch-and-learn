@@ -10,10 +10,6 @@ presentation:
 
 <!-- slide -->
 
-# Demo
-
-<!-- slide -->
-
 # What is randomness?
 
 <!-- slide -->
@@ -25,12 +21,22 @@ A _sequence_ of numbers is random when:
 
 <!-- slide -->
 
+# Example: six-sided dice
+
+<!-- slide -->
+
+@import "./images/dice-throws-pattern.png" {height="64px"}
+
+<!-- slide -->
+
 @import "./images/dice-throws.png" {height="64px"}
 
-- every outcome is equally likely
-- 
+- no visible pattern
+- every side is equally likely
 
-<!-- slide class="left-align-list" -->
+> Innocent until proven guilty
+
+<!-- slide -->
 
 Randomness is used in many different fields:
 
@@ -58,6 +64,8 @@ How can a computer produce randomness?
 <!-- slide -->
 
 How can a computer produce randomness?
+
+➡️ PRNGs
 
 <!-- slide -->
 
@@ -92,6 +100,8 @@ Using following parameters:
 - $c = 3$
 - $m = 2^{4}$
 
+<!-- slide -->
+
 ```math
 \begin{split}
   X_1 &=(7 * 0 + 3) \mod 2^{4}\\
@@ -121,11 +131,11 @@ Using following parameters:
 
 ```mermaid
 flowchart LR
-    seed --> 0;
+    X0 --> 0;
     0 --> 3 --> 24 --> 11;
     11 --> 16 --> 19 --> 8 --> 27;
     27 --> 0;
-    style seed fill:#bbf,stroke:#5454f7;
+    style X0 fill:#bbf,stroke:#5454f7;
     classDef default padding:10px,stroke-width:2px;
 ```
 
@@ -133,29 +143,72 @@ flowchart LR
 
 <!-- slide -->
 
-Two important properties of a PRNG:
+Important properties of a PRNG:
 
-- it will eventually cycle back: a.k.a the **period**
-- knowing the starting points, you can predict the whole sequence a.k.a the **seed**
+- the starting point is called the **seed**
+- the sequence will eventually repeat, the length of the sequence is called the **period**
+- knowing the seed, you can predict _the entire sequence_
 
 <!-- slide -->
 
-# Building our own PRNG
+# Visualizing Math.random()
 
-@import "./demo/builtin.iframe.html" {}
+@import "./demo/builtin.1d.iframe.html" {}
+
+<!-- slide -->
+
+# Visualizing Math.random()
+
+@import "./demo/builtin.2d.iframe.html" {}
+
+<!-- slide -->
+
+# Visualizing our PRNG
+
+@import "./demo/custom.1d.iframe.html" {}
+
+<!-- slide -->
+
+# Visualizing our PRNG
+
+@import "./demo/custom.2d.iframe.html" {}
 
 <!-- slide -->
 
 # PRNG in the wild
 
-| Language             | PRNG             | Period                  |
-| -------------------- | ---------------- | ----------------------- |
-| Java (< JDK 17 2021) | LCG              | $2^{48}$ ($~ 10^{14}$)  |
-| JavaScript (v8)      | xorshift128+     | $2^{128}$ ($~ 10^{38}$) |
-| Python               | Mersenne Twister | $$2^{19937} -1$$        |
-| Ruby                 | Mersenne Twister | $$2^{19937} -1$$        |
+| Language             | PRNG                    | Period                               |
+| -------------------- | ----------------------- | ------------------------------------ |
+| Java (< JDK 17 2021) | LCG                     | $2^{48}$ ($~ 10^{14}$)               |
+| Java (>= JDK 17)     | Various implementations |                                      |
+| JavaScript (v8)      | xorshift128+            | $2^{128}$ ($~ 10^{38}$)              |
+| Python               | Mersenne Twister        | $$2^{19937} -1$$ ($4.3 * 10^{6001}$) |
+| Ruby                 | Mersenne Twister        | $$2^{19937} -1$$ ($4.3 * 10^{6001}$) |
+| Microsoft Excel      | Mersenne Twister        | $$2^{19937} -1$$ ($4.3 * 10^{6001}$) |
 
-<!-- slide vertical=true -->
+For comparison:
+
+- one trillion seconds ($10^{12}$ seconds) is about 32000 years
+- the sun weights about $2 * 10^{30}$ kg
+- there are around $10^{80}$ atoms in the observable universe
+
+<!-- slide -->
+
+# True random generator
+
+<!-- slide  -->
+
+# HotBits
+
+TODO https://www.fourmilab.ch/hotbits/hardware3.html#source
+
+<!-- slide -->
+
+# UChile
+
+TODO https://random.uchile.cl/randomness-beacon
+
+<!-- slide -->
 
 # CloudFlare
 
