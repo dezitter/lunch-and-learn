@@ -21,10 +21,6 @@ A _sequence_ of numbers is random when:
 
 <!-- slide -->
 
-# Example: six-sided dice
-
-<!-- slide -->
-
 @import "./images/dice-throws-pattern.png" {height="64px"}
 
 <!-- slide -->
@@ -34,7 +30,9 @@ A _sequence_ of numbers is random when:
 - no visible pattern
 - every side is equally likely
 
-> Innocent until proven guilty
+<!-- slide -->
+
+> "Innocent until proven guilty"
 
 <!-- slide -->
 
@@ -63,9 +61,7 @@ How can a computer produce randomness?
 
 <!-- slide -->
 
-How can a computer produce randomness?
-
-➡️ PRNGs
+➡️ Pseudo Random Number Generator (PRNG)
 
 <!-- slide -->
 
@@ -73,7 +69,7 @@ How can a computer produce randomness?
 
 <!-- slide -->
 
-A Pseudorandom number generator (PRNG) is a _deterministic_ algorithm which produces a sequence of numbers that _appear_ random.
+A PRNG is a _deterministic_ algorithm which produces a sequence of numbers that _appear_ random according to statistical tests for randomness.
 
 <!-- slide -->
 
@@ -99,6 +95,12 @@ Using following parameters:
 - $a = 7$
 - $c = 3$
 - $m = 2^{4}$
+
+```math
+X_{n+1} = (7 * X_n + 3) \mod 2^{4}
+```
+
+---
 
 <!-- slide -->
 
@@ -143,11 +145,12 @@ flowchart LR
 
 <!-- slide -->
 
-Important properties of a PRNG:
+Properties of a PRNG:
 
-- the starting point is called the **seed**
-- the sequence will eventually repeat, the length of the sequence is called the **period**
-- knowing the seed, you can predict _the entire sequence_
+- the starting point $X^{0}$ is called the **seed**
+- the sequence will eventually repeat
+  - the length of the sequence is known as the **period**
+- if you know the seed, you can predict _the entire sequence_
 
 <!-- slide -->
 

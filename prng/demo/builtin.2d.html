@@ -17,22 +17,39 @@
             </div>
 
             <div class="d-flex justify-content-between align-items-center">
-                <div>
+                <div class="d-flex align-items-center">
                     <button class="btn btn-primary" id="button-start">START</button>
-                    <button class="btn btn-primary" id="button-reset">RESET</button>
+                    <button class="btn btn-primary ms-2" id="button-reset">RESET</button>
+                    <div class="form-check ms-2">
+                        <input class="form-check-input" type="checkbox" id="math-random" checked>
+                        <label class="form-check-label" for="math-random">
+                            Math.random()
+                        </label>
+                    </div>
+                    <div class="form-check ms-2">
+                        <input class="form-check-input" type="checkbox" id="pseudo-random" checked>
+                        <label class="form-check-label" for="pseudo-random">
+                            pseudorandom()
+                        </label>
+                    </div>
+
                 </div>
                 <span id="counter" class="badge text-bg-dark font-monospace ms-2">0</button>
             </div>
         </div>
     </div>
     <script type="text/javascript">
-            const uniqueValues = new Set();
-        function setup ({ random }) {
+        function setup ({ random, pseudorandom }) {
             const canvasContainer = document.getElementById("canvas-container");
             const canvas = document.getElementById("canvas");
             const startButton = document.getElementById("button-start");
             const resetButton = document.getElementById("button-reset");
             const counter = document.getElementById("counter");
+            const mathRandomCheckbox = document.getElementById("math-random")
+            const pseudoRandomCheckbox = document.getElementById("pseudo-random")
+
+            mathRandomCheckbox.value = "true";
+            pseudoRandomCheckbox.value = "true";
 
             const ctx = canvas.getContext("2d");
             const width = 1000;
@@ -41,13 +58,13 @@
             ctx.canvas.width = width;
             ctx.canvas.height = height;
 
+            let n = 50;
             let intervalID;
             let speed = 10;
             let count = 0;
 
-            function point(x, y){
-                count = count +1;
-                counter.innerHTML = count;
+            function point(x, y, color = "black"){
+                ctx.fillStyle = color;
 
                 ctx.beginPath();
                 ctx.arc(x, y, 1, 0, 2 * Math.PI, true);
@@ -58,29 +75,46 @@
                 if (intervalID) clearInterval(intervalID);
 
                 count = 0;
-                counter.innerHTML = count;
                 intervalID = null;
+                counter.innerHTML = count;
                 startButton.innerHTML = "START";
+                mathRandomCheckbox.value = "true";
+                mathRandomCheckbox.checked = true;
+                pseudoRandomCheckbox.value = "true";
+                pseudoRandomCheckbox.checked = true;
 
                 ctx.fillStyle = "white";
                 ctx.fillRect(0, 0, width, height)
-                ctx.fillStyle = "black";
             };
 
             const execute = () => {
-                const x = random() * width;
-                const y = random() * height;
+                let [x, y] = [0,0];
+                let newCount = count;
+                    
+                if (mathRandomCheckbox.value === "true") {
+                    [x, y] = [random() * width, random() * height];
+                    point(x, y, 'red');
+                    newCount = count + 1;
+                }
 
-                point(x, y)
+                if (pseudoRandomCheckbox.value === "true") {
+                    [x, y] = [pseudorandom() * width, pseudorandom() * height];
+                    point(x, y, 'blue');
+                    newCount = count + 1;
+                }
+
+
+                count = newCount
+                counter.innerHTML = newCount
             };
 
             const start = () => {
+                startButton.innerHTML = "STOP";
                 intervalID = setInterval(() => {
-                    for (let i = 0; i < 100; i++) {
+                    for (let i = 0; i < n; i++) {
                         execute()
                     }
                 }, speed);
-                startButton.innerHTML = "STOP";
             };
 
             const stop = () => {
@@ -89,6 +123,7 @@
                 intervalID = null;
                 startButton.innerHTML = "START";
             };
+
             const toggle = () => {
                 if (intervalID) {
                     stop();
@@ -99,13 +134,28 @@
 
             startButton.onclick = toggle;
             resetButton.onclick = reset;
+
+            mathRandomCheckbox.onclick = () => {
+                if (mathRandomCheckbox.value === "true") {
+                    mathRandomCheckbox.value = "false";
+                } else {
+                    mathRandomCheckbox.value = "true";
+                }
+            }
+            pseudoRandomCheckbox.onclick = () => {
+                if (pseudoRandomCheckbox.value === "true") {
+                    pseudoRandomCheckbox.value = "false";
+                } else {
+                    pseudoRandomCheckbox.value = "true";
+                }
+            }
         };
 
         const createLcg = () => {
-            let state = 0;
-            let multiplier = 7;
-            let offset = 3;
-            let mod = 32;
+            let state = Date.now();
+            let multiplier = 25214903917;
+            let offset = 11;
+            let mod = Math.pow(2, 48) - 1;
 
             return () => {
                 state = (state * multiplier + offset) % mod;
@@ -114,8 +164,8 @@
         }
 
         setup({
-            random: () => Math.random()
-            // random: createLcg()
+            random: () => Math.random(),
+            pseudorandom: createLcg()
         })
     </script>
 </body>
