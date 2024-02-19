@@ -154,40 +154,21 @@ Properties of a PRNG:
 
 <!-- slide -->
 
-# Visualizing Math.random()
-
-@import "./demo/builtin.1d.iframe.html" {}
-
-<!-- slide -->
-
-# Visualizing Math.random()
+# Visualizing our PRNG
 
 @import "./demo/builtin.2d.iframe.html" {}
 
-<!-- slide -->
-
-# Visualizing our PRNG
-
-@import "./demo/custom.1d.iframe.html" {}
-
-<!-- slide -->
-
-# Visualizing our PRNG
-
-@import "./demo/custom.2d.iframe.html" {}
-
-<!-- slide -->
+<!-- slide class="font-size-small" -->
 
 # PRNG in the wild
 
-| Language             | PRNG                    | Period                               |
-| -------------------- | ----------------------- | ------------------------------------ |
-| Java (< JDK 17 2021) | LCG                     | $2^{48}$ ($~ 10^{14}$)               |
-| Java (>= JDK 17)     | Various implementations |                                      |
-| JavaScript (v8)      | xorshift128+            | $2^{128}$ ($~ 10^{38}$)              |
-| Python               | Mersenne Twister        | $$2^{19937} -1$$ ($4.3 * 10^{6001}$) |
-| Ruby                 | Mersenne Twister        | $$2^{19937} -1$$ ($4.3 * 10^{6001}$) |
-| Microsoft Excel      | Mersenne Twister        | $$2^{19937} -1$$ ($4.3 * 10^{6001}$) |
+| Language        | PRNG             | Period        |                     |
+| --------------- | ---------------- | ------------- | ------------------- |
+| Java (< 17 )    | LCG              | $2^{48}$      | ($~ 10^{14}$)       |
+| JavaScript (v8) | xorshift128+     | $2^{128}$     | ($~ 10^{38}$)       |
+| Python          | Mersenne Twister | $$2^{19937}$$ | ($4.3 * 10^{6001}$) |
+| Ruby            | Mersenne Twister | $$2^{19937}$$ | ($4.3 * 10^{6001}$) |
+| Microsoft Excel | Mersenne Twister | $$2^{19937}$$ | ($4.3 * 10^{6001}$) |
 
 For comparison:
 
@@ -203,16 +184,20 @@ For comparison:
 
 # HotBits
 
-TODO https://www.fourmilab.ch/hotbits/hardware3.html#source
+@import "./images/hotbits.jpg"
 
 <!-- slide -->
 
 # UChile
 
-TODO https://random.uchile.cl/randomness-beacon
+@import "./images/uchile.png"
 
 <!-- slide -->
 
 # CloudFlare
 
 @import "./images/lava-lamps.jpg"
+
+<!-- slide -->
+
+# Questions?
